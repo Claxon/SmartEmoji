@@ -1,0 +1,23 @@
+# venvs
+.venv/
+venv/
+env/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# editor
+.vscode/
+.idea/
+*.swp
+
+# local data (user data lives in %APPDATA%\SmartEmoji, never in the repo)
+*.local.json
