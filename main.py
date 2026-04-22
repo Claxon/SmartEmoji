@@ -5,6 +5,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
 
 from src import config as config_mod
+from src import single_instance
 from src.custom_store import CustomStore
 from src.emoji_data import EmojiIndex
 from src.hotkeys import HotkeyManager
@@ -76,6 +77,11 @@ class SmartEmojiApp:
 
 
 def main() -> int:
+    # Bail before Qt starts if another SmartEmoji already owns the hotkey.
+    # The mutex lives for the rest of this process's life.
+    if not single_instance.try_acquire():
+        return 0
+
     app = QApplication(sys.argv)
     app.setApplicationName("SmartEmoji")
     app.setQuitOnLastWindowClosed(False)
